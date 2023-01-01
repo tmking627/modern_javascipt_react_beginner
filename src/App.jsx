@@ -4,7 +4,9 @@ import './App.css';
 export const App = () => {
   return (
     <>
-
+      <InputTodo />
+      <SearchTodo />
+      <TodoArea />
     </>
   );
 };
