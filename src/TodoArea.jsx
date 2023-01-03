@@ -1,13 +1,34 @@
 import { useEffect, useState } from "react"
 
 export const TodoArea = (props) => {
-    const [name] = props;
+    const name = props.name;
+
+
 
     // useEffect(() => {
     // },[name]);
+
+    const [inputText,setInputText] = useState('');
     const [todos,setTodo] = useState(['あああ']);
 
+    const onChangeInputText = (e) => {
+        setInputText(e.target.value);
+    }
+
+    const onClickAddTodo = () => {
+        setTodo(todos.concat([inputText]));
+        setInputText('');
+    }
+
+
     return (
+        <>
+        {/* <InputTodo />
+        <SearchTodo /> */}
+        <div>
+            <input type="text" value={inputText} onChange={onChangeInputText}/>
+            <button onClick={onClickAddTodo}>追加</button>
+        </div>
         <ul>
             {todos.map((todo) => {
                 return (
@@ -19,5 +40,6 @@ export const TodoArea = (props) => {
                 );
             })}
         </ul>
+        </>
     );
 }

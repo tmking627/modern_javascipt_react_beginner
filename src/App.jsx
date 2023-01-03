@@ -6,9 +6,7 @@ export const App = () => {
   return (
     <>
       <h1>タイトル</h1>
-      {/* <InputTodo />
-      <SearchTodo /> */}
-      <TodoArea />
+      <TodoArea name = 'あああ'/>
     </>
   );
 };
