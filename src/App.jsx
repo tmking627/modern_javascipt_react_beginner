@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import { TodoArea } from './TodoArea';
 
 export const App = () => {
   return (
     <>
-      <InputTodo />
-      <SearchTodo />
+      <h1>タイトル</h1>
+      {/* <InputTodo />
+      <SearchTodo /> */}
       <TodoArea />
     </>
   );
