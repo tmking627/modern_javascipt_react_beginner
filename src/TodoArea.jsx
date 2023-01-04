@@ -16,8 +16,18 @@ export const TodoArea = (props) => {
     }
 
     const onClickAddTodo = () => {
+        if(inputText === ''){
+            return;
+        }
+
         setTodo(todos.concat([inputText]));
         setInputText('');
+    }
+
+    const onClickDeleteTodo = (index) => {
+        const newTodo = [...todos];
+        newTodo.splice(index,1);
+        setTodo(newTodos);
     }
 
 
@@ -30,11 +40,11 @@ export const TodoArea = (props) => {
             <button onClick={onClickAddTodo}>追加</button>
         </div>
         <ul>
-            {todos.map((todo) => {
+            {todos.map((todo, index) => {
                 return (
                     <li key={todo}>
                         <p>{todo}</p>
-                        <button>削除</button>
+                        <button onClick={onClickDeleteTodo(index)}>削除</button>
                     </li>
 
                 );
