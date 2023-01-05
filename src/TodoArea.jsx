@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { InputTodo } from "./components/inputTodo";
 
 export const TodoArea = (props) => {
     const name = props.name;
@@ -35,10 +36,7 @@ export const TodoArea = (props) => {
         <>
         {/* <InputTodo />
         <SearchTodo /> */}
-        <div>
-            <input type="text" value={inputText} onChange={onChangeInputText}/>
-            <button onClick={onClickAddTodo}>追加</button>
-        </div>
+        <InputTodo />
         <ul>
             {todos.map((todo, index) => {
                 return (
