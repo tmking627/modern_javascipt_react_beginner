@@ -28,7 +28,7 @@ export const TodoArea = (props) => {
     const onClickDeleteTodo = (index) => {
         const newTodo = [...todos];
         newTodo.splice(index,1);
-        setTodo(newTodos);
+        setTodo(newTodo);
     }
 
 
@@ -36,13 +36,13 @@ export const TodoArea = (props) => {
         <>
         {/* <InputTodo />
         <SearchTodo /> */}
-        <InputTodo />
+        <InputTodo inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />
         <ul>
             {todos.map((todo, index) => {
                 return (
                     <li key={todo}>
                         <p>{todo}</p>
-                        <button onClick={onClickDeleteTodo(index)}>削除</button>
+                        <button onClick={() => {onClickDeleteTodo(index)}}>削除</button>
                     </li>
 
                 );
