@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { InputTodo } from "./components/inputTodo";
+import {Todos} from "./components/Todos";
 
 export const TodoArea = (props) => {
     const name = props.name;
@@ -31,23 +32,19 @@ export const TodoArea = (props) => {
         setTodo(newTodo);
     }
 
+    const disabled = todos.length > 10;
+
 
     return (
         <>
         {/* <InputTodo />
         <SearchTodo /> */}
-        <InputTodo inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />
-        <ul>
-            {todos.map((todo, index) => {
-                return (
-                    <li key={todo}>
-                        <p>{todo}</p>
-                        <button onClick={() => {onClickDeleteTodo(index)}}>削除</button>
-                    </li>
-
-                );
-            })}
-        </ul>
+        <InputTodo disabled={disabled} inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />
+        {disabled && (
+            <p style={{ color: 'red' }}>todoは10個までです。</p>
+        )
+        }
+        <Todos todos={todos} onClick={onClickDeleteTodo} />
         </>
     );
 }

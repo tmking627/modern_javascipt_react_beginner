@@ -2,12 +2,12 @@ import React  from "react";
 
 export const InputTodo = (props) => {
 
-    const {inputText, onChange, onClick} = props;
+    const {inputText, onChange, onClick, disabled} = props;
 
     return (
         <div>
-            <input type="text" value={inputText} onChange={onChange}/>
-            <button onClick={onClick}>追加</button>
+            <input disabled={disabled} type="text" value={inputText} onChange={onChange}/>
+            <button disabled={disabled} onClick={onClick}>追加</button>
         </div>
     );
 }
