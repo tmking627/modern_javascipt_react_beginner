@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { InputTodo } from "./components/inputTodo";
 import {Todos} from "./components/Todos";
+import { SearchTodo } from "./components/SearchTodo";
 
 export const TodoArea = (props) => {
     const name = props.name;
@@ -12,6 +13,7 @@ export const TodoArea = (props) => {
 
     const [inputText,setInputText] = useState('');
     const [todos,setTodo] = useState(['あああ']);
+    const [searchTodos,setSearchTodo] = useState(false);
 
     const onChangeInputText = (e) => {
         setInputText(e.target.value);
@@ -32,6 +34,16 @@ export const TodoArea = (props) => {
         setTodo(newTodo);
     }
 
+    const onChangeSearchWord = (e) => {
+        if(e.target.value === ''){
+            setSearchTodo(false);
+            return;
+        }
+        const SearchingTodos = todos.filter(todo => todo.startsWith(e.target.value));
+        console.log(SearchingTodos);
+        setSearchTodo(SearchingTodos);
+    }
+
     const disabled = todos.length > 10;
 
 
@@ -40,11 +52,20 @@ export const TodoArea = (props) => {
         {/* <InputTodo />
         <SearchTodo /> */}
         <InputTodo disabled={disabled} inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />
+        <SearchTodo onChangeSearchWord={onChangeSearchWord} />
         {disabled && (
             <p style={{ color: 'red' }}>todoは10個までです。</p>
         )
         }
-        <Todos todos={todos} onClick={onClickDeleteTodo} />
+        {searchTodos === false  ? (
+             <Todos todos={todos} onClick={onClickDeleteTodo} />
+        ) : (
+        <>
+        <p>searchtodo</p>
+        <Todos todos={searchTodos} onClick={onClickDeleteTodo} />
+         </>
+        )
+        }
         </>
     );
 }
