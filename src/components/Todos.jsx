@@ -6,9 +6,9 @@ export const Todos = (props) => {
          <ul>
             {todos.map((todo, index) => {
                 return (
-                    <li key={todo}>
-                        <p>{todo}</p>
-                        <button onClick={() => {onClick(index)}}>削除</button>
+                    <li key={todo.id}>
+                        <p>{todo.title}</p>
+                        <button onClick={() => {onClick(todo.id)}}>削除</button>
                     </li>
 
                 );

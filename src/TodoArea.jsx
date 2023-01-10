@@ -12,7 +12,7 @@ export const TodoArea = (props) => {
     // },[name]);
 
     const [inputText,setInputText] = useState('');
-    const [todos,setTodo] = useState(['あああ']);
+    const [todos, setTodo] = useState([{id:1,title:'あああ'},{id:2,title:'いいい'}]);
     const [searchTodos,setSearchTodo] = useState(false);
 
     const onChangeInputText = (e) => {
@@ -23,15 +23,18 @@ export const TodoArea = (props) => {
         if(inputText === ''){
             return;
         }
-
-        setTodo(todos.concat([inputText]));
+        const lastTodoID = todos.slice(-1)[0].id;
+        const newTodo = [...todos,{id:lastTodoID + 1,title:inputText}];
+        setTodo(newTodo);
         setInputText('');
     }
 
-    const onClickDeleteTodo = (index) => {
-        const newTodo = [...todos];
-        newTodo.splice(index,1);
+    const onClickDeleteTodo = (id) => {
+
+        const newTodo = todos.filter(todo => todo.id !== id);
+        const SearchingTodos = searchTodos.filter(todo => todo.id !== id);
         setTodo(newTodo);
+        setSearchTodo(SearchingTodos);
     }
 
     const onChangeSearchWord = (e) => {
@@ -39,7 +42,7 @@ export const TodoArea = (props) => {
             setSearchTodo(false);
             return;
         }
-        const SearchingTodos = todos.filter(todo => todo.startsWith(e.target.value));
+        const SearchingTodos = todos.filter(todo => todo.title.startsWith(e.target.value));
         console.log(SearchingTodos);
         setSearchTodo(SearchingTodos);
     }
