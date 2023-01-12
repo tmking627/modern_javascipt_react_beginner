@@ -7,7 +7,7 @@ import { useTodo } from "./hooks/useTodo";
 export const TodoArea = (props) => {
     const name = props.name;
 
-    const [{inputText,todos,searchTodos},
+    const [{inputText,todos,searchTodos,lastTodoID},
         {
             onChangeInputText,
             onClickAddTodo,

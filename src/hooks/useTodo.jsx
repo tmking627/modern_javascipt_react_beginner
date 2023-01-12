@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useTodo = () => {
     const [inputText,setInputText] = useState('');
     const [todos, setTodo] = useState([{id:1,title:'あああ'},{id:2,title:'いいい'}]);
+    const [lastTodoID,setLastTodoID] = useState(2);
     const [searchTodos,setSearchTodo] = useState(false);
 
 
@@ -14,10 +15,12 @@ export const useTodo = () => {
         if(inputText === ''){
             return;
         }
-        const lastTodoID = todos.slice(-1)[0].id;
-        const newTodo = [...todos,{id:lastTodoID + 1,title:inputText}];
+
+        const newLastTodoID = lastTodoID + 1;
+        const newTodo = [...todos,{id:newLastTodoID,title:inputText}];
         setTodo(newTodo);
         setInputText('');
+        setLastTodoID(newLastTodoID);
     }
 
      const onClickDeleteTodo = (id) => {
@@ -44,6 +47,7 @@ export const useTodo = () => {
         inputText,
         todos,
         searchTodos,
+        lastTodoID
     };
 
     const action = {
