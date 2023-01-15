@@ -6,7 +6,7 @@ export const InputTodo = (props) => {
 
     return (
         <div>
-            <input disabled={disabled} type="text" value={inputText} onChange={onChange}/>
+            <input role="inputtodo" disabled={disabled} type="text" value={inputText} onChange={onChange}/>
             <button disabled={disabled} onClick={onClick}>追加</button>
         </div>
     );
