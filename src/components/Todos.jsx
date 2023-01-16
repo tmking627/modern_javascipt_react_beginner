@@ -6,11 +6,10 @@ export const Todos = (props) => {
          <ul>
             {todos.map((todo, index) => {
                 return (
-                    <li key={todo.id}>
+                    <li key={todo.id} role={`todo-${todo.id}`}>
                         <p>{todo.title}</p>
                         <button onClick={() => {onClick(todo.id)}}>削除</button>
                     </li>
-
                 );
             })}
         </ul>
