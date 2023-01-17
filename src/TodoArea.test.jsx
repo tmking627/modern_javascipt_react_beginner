@@ -1,4 +1,6 @@
 import {render, screen,fireEvent} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { InputTodo } from './components/inputTodo';
 import { TodoArea } from './TodoArea';
 
 describe("Todoリスト表示テスト", () => {
@@ -9,19 +11,24 @@ describe("Todoリスト表示テスト", () => {
     });
 });
 
-describe("Todo追加処理のテスト", () => {
-    test('追加処理', () => {
+describe("Todo追加処理のテスト",() => {
+    test('追加処理', async () => {
         //Arrange
         render(<TodoArea />);
         const inputText = screen.getByRole('inputtodo');
         const inputTodoButton = screen.getByRole('button',{name:'追加'});
+        const user = userEvent.setup();
 
         //Act
-        //Todoの文字入力も
-        fireEvent.click(inputTodoButton);
+        //まだ
+        expect(inputText.value).toBe('');
+        expect(inputTodoButton).toBeDisabled();
+
+        await user.type(inputText,'３つ目の追加タスク');
+        await user.click(inputTodoButton);
 
         //Assertion
-        const Todo = screen.getByRole('todo-1');
+        const Todo = screen.getByRole('todo-3');
         expect(Todo).toBeInTheDocument();
     })
 });
