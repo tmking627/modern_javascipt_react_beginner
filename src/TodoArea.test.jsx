@@ -34,9 +34,37 @@ describe("Todo追加処理のテスト",() => {
 });
 
 describe("Todo削除処理のテスト", () => {
+     test('削除処理', async () => {
+        //Arrange
+        render(<TodoArea />);
+        const todo_one = screen.getByRole('todo-1');
+        const todo_two = screen.getByRole('todo-2');
+        const deleteButton = screen.getByRole('todo-btn-1');
+        const deleteButton2 = screen.getByRole('todo-btn-2');
+        const user = userEvent.setup();
+
+        //Act
+        //まだ
+        expect(todo_one).toBeInTheDocument();
+        expect(todo_two).toBeInTheDocument();
+
+        await user.click(deleteButton2);
+
+        expect(todo_one).toBeInTheDocument();
+        expect(todo_two).not.toBeInTheDocument();
+
+        await user.click(deleteButton);
+
+        //Assertion
+        expect(todo_one).not.toBeInTheDocument();
+        expect(todo_two).not.toBeInTheDocument();
+
+    })
 
 });
 
 describe("Todo検索処理のテスト", () => {
+
+
 
 });
