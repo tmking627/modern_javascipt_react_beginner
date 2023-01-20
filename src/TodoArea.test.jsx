@@ -65,6 +65,36 @@ describe("Todo削除処理のテスト", () => {
 
 describe("Todo検索処理のテスト", () => {
 
+    test('検索', async () => {
+        //Arrange
+        render(<TodoArea />);
+        const todo_one = screen.getByRole('todo-1');
+        const todo_two = screen.getByRole('todo-2');
+        const searchTodo = screen.getByRole('search');
+        const user = userEvent.setup();
 
+        //Act
+        //まだ
+        expect(todo_one).toBeInTheDocument();
+        expect(todo_two).toBeInTheDocument();
+
+        await user.type(searchTodo,'あ');
+
+        const search_todo_one = screen.getByText('あああ');
+        const search_todo_two = screen.getByRole('いいい');
+        expect(search_todo_one).toBeInTheDocument();
+        expect(search_todo_two).toBeUndefined();
+
+        await user.type(searchTodo,'い');
+
+        //Assertion
+        expect(search_todo_one).not.toBeInTheDocument();
+        expect(search_todo_two).toBeInTheDocument();
+
+        await user.type(searchTodo,'');
+
+        expect(todo_one).toBeInTheDocument();
+        expect(todo_two).toBeInTheDocument();
+    })
 
 });
