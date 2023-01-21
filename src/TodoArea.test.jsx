@@ -80,21 +80,26 @@ describe("Todo検索処理のテスト", () => {
 
         await user.type(searchTodo,'あ');
 
-        const search_todo_one = screen.getByText('あああ');
-        const search_todo_two = screen.getByRole('いいい');
+        const search_todo_one = screen.queryByText('あああ');
+        const search_todo_two = screen.queryByText('いいい');
         expect(search_todo_one).toBeInTheDocument();
-        expect(search_todo_two).toBeUndefined();
+        expect(search_todo_two).toBeNull();
 
-        await user.type(searchTodo,'い');
+        await user.type(searchTodo,'{backspace}い');
 
+        const search_todo_one2 = screen.queryByText('あああ');
+        const search_todo_two2 = screen.queryByText('いいい');
         //Assertion
-        expect(search_todo_one).not.toBeInTheDocument();
-        expect(search_todo_two).toBeInTheDocument();
+        expect(search_todo_one2).toBeNull();
+        expect(search_todo_two2).toBeInTheDocument();
 
-        await user.type(searchTodo,'');
+        await user.type(searchTodo,'{backspace}');
 
-        expect(todo_one).toBeInTheDocument();
-        expect(todo_two).toBeInTheDocument();
+        const search_todo_one3 = screen.queryByText('あああ');
+        const search_todo_two3 = screen.queryByText('いいい');
+
+        expect(search_todo_one3).toBeInTheDocument();
+        expect(search_todo_two3).toBeInTheDocument();
     })
 
 });
