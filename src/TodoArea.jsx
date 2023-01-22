@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react"
+import { useContext } from "react"
 import { InputTodo } from "./components/inputTodo";
 import {Todos} from "./components/Todos";
 import { SearchTodo } from "./components/SearchTodo";
-import { useTodo } from "./hooks/useTodo";
+import { TodoContext } from "./components/provider/TodoProvider";
 
 export const TodoArea = (props) => {
     const name = props.name;
 
-    const [{inputText,todos,searchTodos,lastTodoID},
-        {
+    const {inputText,todos,searchTodos,lastTodoID,
             onChangeInputText,
             onClickAddTodo,
             onClickDeleteTodo,
             onChangeSearchWord,
         }
-    ] = useTodo();
+    = useContext(TodoContext);
 
     const disabled = todos.length > 10;
 
@@ -29,12 +28,12 @@ export const TodoArea = (props) => {
         )
         }
         {searchTodos === false  ? (
-             <Todos todos={todos} onClick={onClickDeleteTodo} />
+            <Todos todos={todos} onClick={onClickDeleteTodo} />
         ) : (
         <>
         <p>searchtodo</p>
         <Todos todos={searchTodos} onClick={onClickDeleteTodo} />
-         </>
+        </>
         )
         }
         </>
