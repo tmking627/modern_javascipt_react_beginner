@@ -1,7 +1,5 @@
 import { useContext } from "react"
 import { InputTodo } from "./components/inputTodo";
-import {Todos} from "./components/Todos";
-import { SearchTodo } from "./components/SearchTodo";
 import { TodoContext } from "./components/provider/TodoProvider";
 import {
   createBrowserRouter,
@@ -11,15 +9,14 @@ import {
   Routes,
   Link,
 } from "react-router-dom";
+import { Home } from "./components/Home";
 
 export const TodoArea = (props) => {
     const name = props.name;
 
-    const {inputText,todos,searchTodos,lastTodoID,
+    const {inputText,todos,
             onChangeInputText,
             onClickAddTodo,
-            onClickDeleteTodo,
-            onChangeSearchWord,
         }
     = useContext(TodoContext);
 
@@ -29,27 +26,15 @@ export const TodoArea = (props) => {
         <BrowserRouter>
         {/* <InputTodo />
         <SearchTodo /> */}
-        <Routes>
-            <Route path="/create/">
-                <InputTodo disabled={disabled} inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />
-            </Route>
-            <Route path="/">
-                <SearchTodo onChangeSearchWord={onChangeSearchWord} />
-                {disabled && (
-                    <p style={{ color: 'red' }}>todoは10個までです。</p>
-                )
-                }
-                {searchTodos === false  ? (
-                    <Todos todos={todos} onClick={onClickDeleteTodo} />
-                ) : (
-                <>
-                    <p>searchtodo</p>
-                    <Todos todos={searchTodos} onClick={onClickDeleteTodo} />
-                </>
-                )
-                }
-            </Route>
-        </Routes>
+            <ul>
+                <li><Link to="/">ホーム</Link></li>
+                <li><Link to="/create">todo作成</Link></li>
+            </ul>
+            <Routes>
+                <Route path="/create" element={<InputTodo disabled={disabled} inputText={inputText} onChange={onChangeInputText} onClick={onClickAddTodo} />} />
+                <Route path="/" element={<Home />}>
+                </Route>
+            </Routes>
         </BrowserRouter>
     );
 }

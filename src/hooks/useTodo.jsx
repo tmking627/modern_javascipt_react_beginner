@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 
 export const useTodo = () => {
     const [inputText,setInputText] = useState('');
     const [todos, setTodo] = useState([{id:1,title:'あああ'},{id:2,title:'いいい'}]);
     const [lastTodoID,setLastTodoID] = useState(2);
     const [searchTodos,setSearchTodo] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const onChangeInputText = (e) => {
@@ -21,6 +24,7 @@ export const useTodo = () => {
         setTodo(newTodo);
         setInputText('');
         setLastTodoID(newLastTodoID);
+        navigate("/");
     }
 
      const onClickDeleteTodo = (id) => {
